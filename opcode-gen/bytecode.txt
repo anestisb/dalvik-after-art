@@ -193,7 +193,7 @@ op   6f invoke-super                35c  n method-ref    continue|throw|invoke
 op   70 invoke-direct               35c  n method-ref    continue|throw|invoke
 op   71 invoke-static               35c  n method-ref    continue|throw|invoke
 op   72 invoke-interface            35c  n method-ref    continue|throw|invoke
-# unused: op 73
+op   73 +return-void-barrier        10x  n none          optimized|return
 op   74 invoke-virtual/range        3rc  n method-ref    continue|throw|invoke
 op   75 invoke-super/range          3rc  n method-ref    continue|throw|invoke
 op   76 invoke-direct/range         3rc  n method-ref    continue|throw|invoke
@@ -309,38 +309,13 @@ op   e2 ushr-int/lit8               22b  y none          continue
 # Optimized opcodes (not valid in an unoptimized dex file)
 #
 
-op   e3 +iget-volatile              22c  y field-ref     optimized|continue|throw
-op   e4 +iput-volatile              22c  n field-ref     optimized|continue|throw
-op   e5 +sget-volatile              21c  y field-ref     optimized|continue|throw
-op   e6 +sput-volatile              21c  n field-ref     optimized|continue|throw
-op   e7 +iget-object-volatile       22c  y field-ref     optimized|continue|throw
-op   e8 +iget-wide-volatile         22c  y field-ref     optimized|continue|throw
-op   e9 +iput-wide-volatile         22c  n field-ref     optimized|continue|throw
-op   ea +sget-wide-volatile         21c  y field-ref     optimized|continue|throw
-op   eb +sput-wide-volatile         21c  n field-ref     optimized|continue|throw
+op   e3 +iget-quick                 22cs y field-offset  optimized|continue|throw
+op   e4 +iget-wide-quick            22cs y field-offset  optimized|continue|throw
+op   e5 +iget-object-quick          22cs y field-offset  optimized|continue|throw
+op   e6 +iput-quick                 22cs n field-offset  optimized|continue|throw
+op   e7 +iput-wide-quick            22cs n field-offset  optimized|continue|throw
+op   e8 +iput-object-quick          22cs n field-offset  optimized|continue|throw
+op   e9 +invoke-virtual-quick       35ms n vtable-offset optimized|continue|throw|invoke
+op   ea +invoke-virtual-quick/range 3rms n vtable-offset optimized|continue|throw|invoke
 
-# Technically "breakpoint" isn't really an optimized opcode, but it
-# fits the label in terms of not being valid in regular dex files.
-op   ec ^breakpoint                 00x  n unknown       optimized
-
-op   ed ^throw-verification-error   20bc n varies        optimized|throw
-op   ee +execute-inline             35mi n inline-method optimized|continue|throw
-op   ef +execute-inline/range       3rmi n inline-method optimized|continue|throw
-
-op   f0 +invoke-object-init/range   35c  n method-ref    optimized|continue|throw|invoke
-op   f1 +return-void-barrier        10x  n none          optimized|return
-op   f2 +iget-quick                 22cs y field-offset  optimized|continue|throw
-op   f3 +iget-wide-quick            22cs y field-offset  optimized|continue|throw
-op   f4 +iget-object-quick          22cs y field-offset  optimized|continue|throw
-op   f5 +iput-quick                 22cs n field-offset  optimized|continue|throw
-op   f6 +iput-wide-quick            22cs n field-offset  optimized|continue|throw
-op   f7 +iput-object-quick          22cs n field-offset  optimized|continue|throw
-op   f8 +invoke-virtual-quick       35ms n vtable-offset optimized|continue|throw|invoke
-op   f9 +invoke-virtual-quick/range 3rms n vtable-offset optimized|continue|throw|invoke
-op   fa +invoke-super-quick         35ms n vtable-offset optimized|continue|throw|invoke
-op   fb +invoke-super-quick/range   3rms n vtable-offset optimized|continue|throw|invoke
-op   fc +iput-object-volatile       22c  n field-ref     optimized|continue|throw
-op   fd +sget-object-volatile       21c  y field-ref     optimized|continue|throw
-op   fe +sput-object-volatile       21c  n field-ref     optimized|continue|throw
-
-# unused: op ff
+# unused: op eb...ff

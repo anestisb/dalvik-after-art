@@ -183,7 +183,7 @@ enum Opcode {
     OP_INVOKE_DIRECT                = 0x70,
     OP_INVOKE_STATIC                = 0x71,
     OP_INVOKE_INTERFACE             = 0x72,
-    OP_UNUSED_73                    = 0x73,
+    OP_RETURN_VOID_BARRIER          = 0x73,
     OP_INVOKE_VIRTUAL_RANGE         = 0x74,
     OP_INVOKE_SUPER_RANGE           = 0x75,
     OP_INVOKE_DIRECT_RANGE          = 0x76,
@@ -295,34 +295,34 @@ enum Opcode {
     OP_SHL_INT_LIT8                 = 0xe0,
     OP_SHR_INT_LIT8                 = 0xe1,
     OP_USHR_INT_LIT8                = 0xe2,
-    OP_IGET_VOLATILE                = 0xe3,
-    OP_IPUT_VOLATILE                = 0xe4,
-    OP_SGET_VOLATILE                = 0xe5,
-    OP_SPUT_VOLATILE                = 0xe6,
-    OP_IGET_OBJECT_VOLATILE         = 0xe7,
-    OP_IGET_WIDE_VOLATILE           = 0xe8,
-    OP_IPUT_WIDE_VOLATILE           = 0xe9,
-    OP_SGET_WIDE_VOLATILE           = 0xea,
-    OP_SPUT_WIDE_VOLATILE           = 0xeb,
-    OP_BREAKPOINT                   = 0xec,
-    OP_THROW_VERIFICATION_ERROR     = 0xed,
-    OP_EXECUTE_INLINE               = 0xee,
-    OP_EXECUTE_INLINE_RANGE         = 0xef,
-    OP_INVOKE_OBJECT_INIT_RANGE     = 0xf0,
-    OP_RETURN_VOID_BARRIER          = 0xf1,
-    OP_IGET_QUICK                   = 0xf2,
-    OP_IGET_WIDE_QUICK              = 0xf3,
-    OP_IGET_OBJECT_QUICK            = 0xf4,
-    OP_IPUT_QUICK                   = 0xf5,
-    OP_IPUT_WIDE_QUICK              = 0xf6,
-    OP_IPUT_OBJECT_QUICK            = 0xf7,
-    OP_INVOKE_VIRTUAL_QUICK         = 0xf8,
-    OP_INVOKE_VIRTUAL_QUICK_RANGE   = 0xf9,
-    OP_INVOKE_SUPER_QUICK           = 0xfa,
-    OP_INVOKE_SUPER_QUICK_RANGE     = 0xfb,
-    OP_IPUT_OBJECT_VOLATILE         = 0xfc,
-    OP_SGET_OBJECT_VOLATILE         = 0xfd,
-    OP_SPUT_OBJECT_VOLATILE         = 0xfe,
+    OP_IGET_QUICK                   = 0xe3,
+    OP_IGET_WIDE_QUICK              = 0xe4,
+    OP_IGET_OBJECT_QUICK            = 0xe5,
+    OP_IPUT_QUICK                   = 0xe6,
+    OP_IPUT_WIDE_QUICK              = 0xe7,
+    OP_IPUT_OBJECT_QUICK            = 0xe8,
+    OP_INVOKE_VIRTUAL_QUICK         = 0xe9,
+    OP_INVOKE_VIRTUAL_QUICK_RANGE   = 0xea,
+    OP_UNUSED_EB                    = 0xeb,
+    OP_UNUSED_EC                    = 0xec,
+    OP_UNUSED_ED                    = 0xed,
+    OP_UNUSED_EE                    = 0xee,
+    OP_UNUSED_EF                    = 0xef,
+    OP_UNUSED_F0                    = 0xf0,
+    OP_UNUSED_F1                    = 0xf1,
+    OP_UNUSED_F2                    = 0xf2,
+    OP_UNUSED_F3                    = 0xf3,
+    OP_UNUSED_F4                    = 0xf4,
+    OP_UNUSED_F5                    = 0xf5,
+    OP_UNUSED_F6                    = 0xf6,
+    OP_UNUSED_F7                    = 0xf7,
+    OP_UNUSED_F8                    = 0xf8,
+    OP_UNUSED_F9                    = 0xf9,
+    OP_UNUSED_FA                    = 0xfa,
+    OP_UNUSED_FB                    = 0xfb,
+    OP_UNUSED_FC                    = 0xfc,
+    OP_UNUSED_FD                    = 0xfd,
+    OP_UNUSED_FE                    = 0xfe,
     OP_UNUSED_FF                    = 0xff,
     // END(libdex-opcode-enum)
 };
@@ -449,7 +449,7 @@ enum Opcode {
         H(OP_INVOKE_DIRECT),                                                  \
         H(OP_INVOKE_STATIC),                                                  \
         H(OP_INVOKE_INTERFACE),                                               \
-        H(OP_UNUSED_73),                                                      \
+        H(OP_RETURN_VOID_BARRIER),                                            \
         H(OP_INVOKE_VIRTUAL_RANGE),                                           \
         H(OP_INVOKE_SUPER_RANGE),                                             \
         H(OP_INVOKE_DIRECT_RANGE),                                            \
@@ -561,21 +561,6 @@ enum Opcode {
         H(OP_SHL_INT_LIT8),                                                   \
         H(OP_SHR_INT_LIT8),                                                   \
         H(OP_USHR_INT_LIT8),                                                  \
-        H(OP_IGET_VOLATILE),                                                  \
-        H(OP_IPUT_VOLATILE),                                                  \
-        H(OP_SGET_VOLATILE),                                                  \
-        H(OP_SPUT_VOLATILE),                                                  \
-        H(OP_IGET_OBJECT_VOLATILE),                                           \
-        H(OP_IGET_WIDE_VOLATILE),                                             \
-        H(OP_IPUT_WIDE_VOLATILE),                                             \
-        H(OP_SGET_WIDE_VOLATILE),                                             \
-        H(OP_SPUT_WIDE_VOLATILE),                                             \
-        H(OP_BREAKPOINT),                                                     \
-        H(OP_THROW_VERIFICATION_ERROR),                                       \
-        H(OP_EXECUTE_INLINE),                                                 \
-        H(OP_EXECUTE_INLINE_RANGE),                                           \
-        H(OP_INVOKE_OBJECT_INIT_RANGE),                                       \
-        H(OP_RETURN_VOID_BARRIER),                                            \
         H(OP_IGET_QUICK),                                                     \
         H(OP_IGET_WIDE_QUICK),                                                \
         H(OP_IGET_OBJECT_QUICK),                                              \
@@ -584,11 +569,26 @@ enum Opcode {
         H(OP_IPUT_OBJECT_QUICK),                                              \
         H(OP_INVOKE_VIRTUAL_QUICK),                                           \
         H(OP_INVOKE_VIRTUAL_QUICK_RANGE),                                     \
-        H(OP_INVOKE_SUPER_QUICK),                                             \
-        H(OP_INVOKE_SUPER_QUICK_RANGE),                                       \
-        H(OP_IPUT_OBJECT_VOLATILE),                                           \
-        H(OP_SGET_OBJECT_VOLATILE),                                           \
-        H(OP_SPUT_OBJECT_VOLATILE),                                           \
+        H(OP_UNUSED_EB),                                                      \
+        H(OP_UNUSED_EC),                                                      \
+        H(OP_UNUSED_ED),                                                      \
+        H(OP_UNUSED_EE),                                                      \
+        H(OP_UNUSED_EF),                                                      \
+        H(OP_UNUSED_F0),                                                      \
+        H(OP_UNUSED_F1),                                                      \
+        H(OP_UNUSED_F2),                                                      \
+        H(OP_UNUSED_F3),                                                      \
+        H(OP_UNUSED_F4),                                                      \
+        H(OP_UNUSED_F5),                                                      \
+        H(OP_UNUSED_F6),                                                      \
+        H(OP_UNUSED_F7),                                                      \
+        H(OP_UNUSED_F8),                                                      \
+        H(OP_UNUSED_F9),                                                      \
+        H(OP_UNUSED_FA),                                                      \
+        H(OP_UNUSED_FB),                                                      \
+        H(OP_UNUSED_FC),                                                      \
+        H(OP_UNUSED_FD),                                                      \
+        H(OP_UNUSED_FE),                                                      \
         H(OP_UNUSED_FF),                                                      \
         /* END(libdex-goto-table) */                                          \
     };
